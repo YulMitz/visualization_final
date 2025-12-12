@@ -1,0 +1,180 @@
+{
+  "year": 2012,
+  "total_samples": 1443,
+  "nodes": {
+    "subjective": [
+      "下層階級",
+      "勞工階級",
+      "中下層階級",
+      "中層階級",
+      "中上層階級",
+      "上層階級"
+    ],
+    "objective": [
+      "低",
+      "中低",
+      "中等",
+      "中高",
+      "高"
+    ]
+  },
+  "links": [
+    {
+      "source": "中層階級",
+      "target": "低",
+      "value": 50
+    },
+    {
+      "source": "中下層階級",
+      "target": "中低",
+      "value": 61
+    },
+    {
+      "source": "中上層階級",
+      "target": "低",
+      "value": 7
+    },
+    {
+      "source": "勞工階級",
+      "target": "低",
+      "value": 73
+    },
+    {
+      "source": "中層階級",
+      "target": "高",
+      "value": 253
+    },
+    {
+      "source": "中層階級",
+      "target": "中高",
+      "value": 84
+    },
+    {
+      "source": "中上層階級",
+      "target": "中高",
+      "value": 12
+    },
+    {
+      "source": "中上層階級",
+      "target": "中等",
+      "value": 9
+    },
+    {
+      "source": "中下層階級",
+      "target": "低",
+      "value": 49
+    },
+    {
+      "source": "中層階級",
+      "target": "中低",
+      "value": 64
+    },
+    {
+      "source": "上層階級",
+      "target": "中低",
+      "value": 2
+    },
+    {
+      "source": "中下層階級",
+      "target": "中等",
+      "value": 55
+    },
+    {
+      "source": "勞工階級",
+      "target": "中高",
+      "value": 36
+    },
+    {
+      "source": "中上層階級",
+      "target": "高",
+      "value": 92
+    },
+    {
+      "source": "勞工階級",
+      "target": "中低",
+      "value": 100
+    },
+    {
+      "source": "下層階級",
+      "target": "低",
+      "value": 57
+    },
+    {
+      "source": "中層階級",
+      "target": "中等",
+      "value": 102
+    },
+    {
+      "source": "中下層階級",
+      "target": "高",
+      "value": 105
+    },
+    {
+      "source": "下層階級",
+      "target": "中高",
+      "value": 4
+    },
+    {
+      "source": "中上層階級",
+      "target": "中低",
+      "value": 14
+    },
+    {
+      "source": "勞工階級",
+      "target": "中等",
+      "value": 75
+    },
+    {
+      "source": "勞工階級",
+      "target": "高",
+      "value": 63
+    },
+    {
+      "source": "下層階級",
+      "target": "中等",
+      "value": 15
+    },
+    {
+      "source": "中下層階級",
+      "target": "中高",
+      "value": 43
+    },
+    {
+      "source": "上層階級",
+      "target": "中高",
+      "value": 1
+    },
+    {
+      "source": "下層階級",
+      "target": "中低",
+      "value": 11
+    },
+    {
+      "source": "下層階級",
+      "target": "高",
+      "value": 3
+    },
+    {
+      "source": "上層階級",
+      "target": "高",
+      "value": 3
+    }
+  ],
+  "summary": {
+    "by_subjective": {
+      "中層階級": 553,
+      "中下層階級": 313,
+      "中上層階級": 134,
+      "勞工階級": 347,
+      "上層階級": 6,
+      "下層階級": 90
+    },
+    "by_objective": {
+      "低": 236,
+      "中低": 252,
+      "高": 519,
+      "中高": 180,
+      "中等": 256
+    }
+  }
+}

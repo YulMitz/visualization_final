@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣社會變遷調查：主觀與客觀財富分析 (1992-2022)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav id="sidebar">
+        <div class="nav-header">
+            <h2>台灣社會變遷調查</h2>
+            <p class="nav-subtitle">1992-2022 財富分析</p>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#overview" class="nav-link active" data-panel="overview">專案概覽</a></li>
+            <li><a href="#geographical" class="nav-link" data-panel="geographical">地理分布圖</a></li>
+            <li class="nav-dropdown">
+                <span class="nav-dropdown-label">年度分析 ▼</span>
+                <ul class="nav-submenu">
+                    <li><a href="#year-1992" class="nav-link" data-panel="year-1992">1992年分析</a></li>
+                    <li><a href="#year-1997" class="nav-link" data-panel="year-1997">1997年分析</a></li>
+                    <li><a href="#year-2002" class="nav-link" data-panel="year-2002">2002年分析</a></li>
+                    <li><a href="#year-2007" class="nav-link" data-panel="year-2007">2007年分析</a></li>
+                    <li><a href="#year-2012" class="nav-link" data-panel="year-2012">2012年分析</a></li>
+                    <li><a href="#year-2017" class="nav-link" data-panel="year-2017">2017年分析</a></li>
+                    <li><a href="#year-2022" class="nav-link" data-panel="year-2022">2022年分析</a></li>
+                    <li><a href="#heatmap" class="nav-link" data-panel="heatmap">熱點圖分析</a></li>
+                </ul>
+            </li>
+            <li><a href="#comparison" class="nav-link" data-panel="comparison">趨勢比較</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+        <!-- Overview Panel -->
+        <section id="overview" class="panel active">
+            <div class="panel-content">
+                <h1>台灣社會變遷調查：主觀與客觀財富分析</h1>
+                <p class="subtitle">1992-2022 三十年社會階層變遷</p>
+
+                <div class="intro-section">
+                    <h2>研究問題</h2>
+                    <p>本視覺化專案探討台灣民眾的<strong>主觀階層認同</strong>與<strong>客觀經濟地位</strong>之間的關係，以及這種關係在過去三十年間的變化趨勢。</p>
+                </div>
+
+                <div class="intro-section">
+                    <h2>資料來源</h2>
+                    <p>本專案使用<strong>台灣社會變遷基本調查</strong>（Taiwan Social Change Survey, TSCS）資料，涵蓋七個調查年度：</p>
+                    <ul>
+                        <li>1992年、1997年、2002年、2007年、2012年、2017年、2022年</li>
+                        <li>每次調查樣本數約1,300-2,400人</li>
+                        <li>資料格式：SPSS (.sav) 檔案，包含完整變數標籤與值標籤</li>
+                    </ul>
+                </div>
+
+                <div class="intro-section">
+                    <h2>核心概念</h2>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <h3>主觀財富（階層認同）</h3>
+                            <p>受訪者自我評估的社會階層位置，包含六個類別：</p>
+                            <ul>
+                                <li>上層階級</li>
+                                <li>中上層階級</li>
+                                <li>中層階級</li>
+                                <li>中下層階級</li>
+                                <li>勞工階級</li>
+                                <li>下層階級</li>
+                            </ul>
+                        </div>
+                        <div class="concept-card">
+                            <h3>客觀財富（經濟地位）</h3>
+                            <p>根據家戶年收入五等分位數分類：</p>
+                            <ul>
+                                <li>高（前20%）</li>
+                                <li>中高（20-40%）</li>
+                                <li>中等（40-60%）</li>
+                                <li>中低（60-80%）</li>
+                                <li>低（後20%）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro-section">
+                    <h2>視覺化導覽</h2>
+                    <div class="guide-grid">
+                        <div class="guide-card">
+                            <h4>📍 地理分布圖</h4>
+                            <p>透過台灣地圖與網格疊加，呈現不同地區的財富分布差異。可選擇不同年度進行比較。</p>
+                        </div>
+                        <div class="guide-card">
+                            <h4>📊 年度分析</h4>
+                            <p>使用桑基圖（Sankey Diagram）呈現各年度主觀階層認同與客觀經濟地位之間的對應關係與流動。</p>
+                        </div>
+                        <div class="guide-card">
+                            <h4>📈 趨勢比較</h4>
+                            <p>折線圖呈現三十年間主觀財富、客觀財富與幸福感的變化趨勢，揭示台灣社會階層意識的演變。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro-section methodology">
+                    <h2>方法論說明</h2>
+                    <h3>資料處理流程</h3>
+                    <ol>
+                        <li><strong>變數提取</strong>：從各年度問卷中提取主觀階層認同變數（變數名稱因年度而異）</li>
+                        <li><strong>收入分類</strong>：將家戶年收入轉換為五等分位數分類，作為客觀經濟地位指標</li>
+                        <li><strong>特殊處理</strong>：
+                            <ul>
+                                <li>2002年：結合職業變數識別勞工階級</li>
+                                <li>2017年：處理多筆工作紀錄，取最後有效值</li>
+                                <li>1992年：排除低收入主婦樣本</li>
+                            </ul>
+                        </li>
+                        <li><strong>無效值過濾</strong>：移除「不知道」、「拒答」、「遺漏值」等無效樣本</li>
+                        <li><strong>地理編碼</strong>：將郵遞區號對應至縣市與鄉鎮層級</li>
+                    </ol>
+
+                    <h3>收入五等分位數基準（年收入，新台幣元）</h3>
+                    <table class="threshold-table">
+                        <thead>
+                            <tr>
+                                <th>年度</th>
+                                <th>低 ↔ 中低</th>
+                                <th>中低 ↔ 中等</th>
+                                <th>中等 ↔ 中高</th>
+                                <th>中高 ↔ 高</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1992</td>
+                                <td>235,752</td>
+                                <td>423,392</td>
+                                <td>560,466</td>
+                                <td>742,466</td>
+                            </tr>
+                            <tr>
+                                <td>1997</td>
+                                <td>312,458</td>
+                                <td>557,429</td>
+                                <td>753,919</td>
+                                <td>1,003,815</td>
+                            </tr>
+                            <tr>
+                                <td>2002</td>
+                                <td>353,952</td>
+                                <td>583,776</td>
+                                <td>809,412</td>
+                                <td>1,096,164</td>
+                            </tr>
+                            <tr>
+                                <td>2007</td>
+                                <td>349,548</td>
+                                <td>620,184</td>
+                                <td>847,560</td>
+                                <td>1,156,620</td>
+                            </tr>
+                            <tr>
+                                <td>2012</td>
+                                <td>368,388</td>
+                                <td>655,872</td>
+                                <td>896,304</td>
+                                <td>1,223,556</td>
+                            </tr>
+                            <tr>
+                                <td>2017</td>
+                                <td>391,080</td>
+                                <td>695,880</td>
+                                <td>951,744</td>
+                                <td>1,299,984</td>
+                            </tr>
+                            <tr>
+                                <td>2022</td>
+                                <td>446,532</td>
+                                <td>792,600</td>
+                                <td>1,086,300</td>
+                                <td>1,484,496</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="intro-section">
+                    <p class="note"><strong>提示：</strong>請使用左側選單切換不同的視覺化面板，探索台灣三十年來的社會階層變遷。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geographical View Panel -->
+        <section id="geographical" class="panel">
+            <div class="panel-content">
+                <h1>地理分布圖</h1>
+                <p class="subtitle">台灣各地區財富分布視覺化</p>
+
+                <div class="controls">
+                    <label for="year-select">選擇年度：</label>
+                    <select id="year-select">
+                        <option value="1992">1992</option>
+                        <option value="1997">1997</option>
+                        <option value="2002">2002</option>
+                        <option value="2007">2007</option>
+                        <option value="2012">2012</option>
+                        <option value="2017">2017</option>
+                        <option value="2022" selected>2022</option>
+                    </select>
+                </div>
+
+                <div id="map-container">
+                    <!-- Map will be rendered here by D3.js -->
+                </div>
+
+                <div id="map-legend">
+                    <!-- Legend will be added dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Year Analysis Panels (Individual pages for each year) -->
+        <!-- 1992 Year Analysis -->
+        <section id="year-1992" class="panel">
+            <div class="panel-content">
+                <h1>1992年 階層流動分析</h1>
+                <p class="subtitle">主觀階層認同與客觀經濟地位的對應關係</p>
+                <div id="sankey-1992" class="sankey-container">
+                    <!-- Animated Sankey diagram will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 1997 Year Analysis -->
+        <section id="year-1997" class="panel">
+            <div class="panel-content">
+                <h1>1997年 階層流動分析</h1>
+                <p class="subtitle">主觀階層認同與客觀經濟地位的對應關係</p>
+                <div id="sankey-1997" class="sankey-container">
+                    <!-- Animated Sankey diagram will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2002 Year Analysis -->
+        <section id="year-2002" class="panel">
+            <div class="panel-content">
+                <h1>2002年 階層流動分析</h1>
+                <p class="subtitle">主觀階層認同與客觀經濟地位的對應關係</p>
+                <div id="sankey-2002" class="sankey-container">
+                    <!-- Animated Sankey diagram will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2007 Year Analysis -->
+        <section id="year-2007" class="panel">
+            <div class="panel-content">
+                <h1>2007年 階層流動分析</h1>
+                <p class="subtitle">主觀階層認同與客觀經濟地位的對應關係</p>
+                <div id="sankey-2007" class="sankey-container">
+                    <!-- Animated Sankey diagram will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2012 Year Analysis -->
+        <section id="year-2012" class="panel">
+            <div class="panel-content">
+                <h1>2012年 階層流動分析</h1>
+                <p class="subtitle">主觀階層認同與客觀經濟地位的對應關係</p>
+                <div id="sankey-2012" class="sankey-container">
+                    <!-- Animated Sankey diagram will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2017 Year Analysis -->
+        <section id="year-2017" class="panel">
+            <div class="panel-content">
+                <h1>2017年 階層流動分析</h1>
+                <p class="subtitle">主觀階層認同與客觀經濟地位的對應關係</p>
+                <div id="sankey-2017" class="sankey-container">
+                    <!-- Animated Sankey diagram will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2022 Year Analysis -->
+        <section id="year-2022" class="panel">
+            <div class="panel-content">
+                <h1>2022年 階層流動分析</h1>
+                <p class="subtitle">主觀階層認同與客觀經濟地位的對應關係</p>
+                <div id="sankey-2022" class="sankey-container">
+                    <!-- Animated Sankey diagram will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Heatmap Analysis Panel -->
+        <section id="heatmap" class="panel">
+            <div class="panel-content">
+                <h1>主觀財富認知熱點圖</h1>
+                <p class="subtitle">客觀財富與主觀階層認同的時序分析（1992-2022）</p>
+
+                <div id="heatmap-container">
+                    <!-- Heatmap will be rendered here by D3.js -->
+                </div>
+
+                <div class="heatmap-description">
+                    <h3>圖表說明</h3>
+                    <ul>
+                        <li><strong>Y軸（客觀財富）</strong>：根據家戶收入五等分位數劃分（低、中低、中等、中高、高）</li>
+                        <li><strong>X軸（年度）</strong>：1992年至2022年的七個調查年度</li>
+                        <li><strong>色相（認知差異）</strong>：主觀階層認知與客觀財富的差異程度
+                            <ul style="margin-top: 5px; font-size: 0.95em;">
+                                <li><span style="color: #4575b4; font-weight: bold;">藍色</span>：認知相符，主觀階層與客觀財富一致</li>
+                                <li><span style="color: #d73027; font-weight: bold;">紅色</span>：認知偏差，主觀階層與客觀財富差異大</li>
+                            </ul>
+                        </li>
+                        <li><strong>數字標籤</strong>：格子內的數字代表該群體的平均主觀階層分數（1-6分）</li>
+                        <li><strong>互動提示</strong>：滑鼠移到格子上可查看詳細資訊，包括認知方向（高估/低估/相符）</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Panel -->
+        <section id="comparison" class="panel">
+            <div class="panel-content">
+                <h1>趨勢比較</h1>
+                <p class="subtitle">三十年社會階層意識與幸福感變遷</p>
+
+                <div id="comparison-chart-container">
+                    <!-- Line chart will be rendered here by D3.js -->
+                </div>
+
+                <div id="comparison-legend">
+                    <!-- Legend will be added dynamically -->
+                </div>
+
+                <div class="chart-description">
+                    <h3>圖表說明</h3>
+                    <ul>
+                        <li><strong>主觀財富</strong>：受訪者自我評估的階層位置（標準化為0-1分數）</li>
+                        <li><strong>客觀財富</strong>：根據家戶收入五等分位數計算（標準化為0-1分數）</li>
+                        <li><strong>平均幸福感</strong>：受訪者自評的生活滿意度（原始量尺）</li>
+                    </ul>
+                    <p class="note">註：1992年無幸福感資料</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/geographical.js"></script>
+    <script src="js/sankey.js"></script>
+    <script src="js/heatmap.js"></script>
+    <script src="js/comparison.js"></script>
+</body>
+</html>

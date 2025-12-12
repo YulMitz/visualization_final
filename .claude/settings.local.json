@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(python prepare_wealth_data.py:*)",
+      "Bash(jupyter:*)",
+      "Bash(/home/mulkooo/visualization/.venv/bin/python:*)",
+      "Bash(ls:*)",
+      "Bash(lsof:*)",
+      "Bash(sudo ufw status:*)",
+      "Bash(sudo iptables:*)"
+    ]
+  }
+}
